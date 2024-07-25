@@ -157,32 +157,7 @@ if __name__ == "__main__":
             toolchain=Toolchain(compiler=Compiler.GCC, version=DEFAULT_LLVM_VERSION),
             run_veristat=True,
             parallel_tests=True,
-        ),
-        BuildConfig(
-            arch=Arch.X86_64,
-            toolchain=Toolchain(compiler=Compiler.LLVM, version=DEFAULT_LLVM_VERSION),
-            build_release=True,
-        ),
-        BuildConfig(
-            arch=Arch.X86_64,
-            toolchain=Toolchain(compiler=Compiler.LLVM, version=18),
-            build_release=True,
-        ),
-        BuildConfig(
-            arch=Arch.AARCH64,
-            toolchain=Toolchain(compiler=Compiler.GCC, version=DEFAULT_LLVM_VERSION),
-        ),
-        # BuildConfig(
-        #     arch=Arch.AARCH64,
-        #     toolchain=Toolchain(
-        #         compiler=Compiler.LLVM,
-        #         version=DEFAULT_LLVM_VERSION
-        #     ),
-        # ),
-        BuildConfig(
-            arch=Arch.S390X,
-            toolchain=Toolchain(compiler=Compiler.GCC, version=DEFAULT_LLVM_VERSION),
-        ),
+        )
     ]
 
     # Outside of those repositories we only run on x86_64
