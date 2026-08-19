@@ -163,6 +163,16 @@ jobs:
           archive: ${{ env.ARTIFACTS_ARCHIVE }}
           kbuild-output: ${{ env.KBUILD_OUTPUT }}
           repo-root: ${{ env.REPO_ROOT }}
+      - if: ${{ !inputs.release }}
+        name: Test bpftool build
+        # FIXME: use the canonical libbpf/ci action once test_bpftool_build.sh
+        # support lands upstream, instead of custom fork
+        uses: Tropicao/libbpf-ci/build-bpftool@test_bpftool_build
+        env:
+          MAX_MAKE_JOBS: 32
+        with:
+          kernel-root: ${{ env.KERNEL_ROOT }}
+          kbuild-output: ${{ env.KBUILD_OUTPUT }}
       - if: ${{ github.event_name != 'push' }}
         name: Remove KBUILD_OUTPUT content
         shell: bash
