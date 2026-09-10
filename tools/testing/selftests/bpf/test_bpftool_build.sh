@@ -48,7 +48,7 @@ check() {
 
 make_and_clean() {
 	echo -e "\$PWD:    $PWD"
-	echo -e "command: make -s $* >/dev/null"
+	echo -e "command: make $J -s $* >/dev/null"
 	make $J -s $* >/dev/null
 	if [ $? -ne 0 ] ; then
 		ERROR=1
@@ -75,7 +75,7 @@ make_with_tmpdir() {
 		ARGS=${@:1:(($# - 1))}
 	fi
 	echo -e "\$PWD:    $PWD"
-	echo -e "command: make -s $ARGS ${@: -1}=$TMPDIR/ >/dev/null"
+	echo -e "command: make $J -s $ARGS ${@: -1}=$TMPDIR/ >/dev/null"
 	make $J -s $ARGS ${@: -1}=$TMPDIR/ >/dev/null
 	if [ $? -ne 0 ] ; then
 		ERROR=1
@@ -88,21 +88,15 @@ make_with_tmpdir() {
 echo "Trying to build bpftool"
 echo -e "... through kbuild\n"
 
-if [ -f ".config" ] ; then
-	make_and_clean tools/bpf
+make_and_clean tools/bpf
 
-	## $OUTPUT is overwritten in kbuild Makefile, and thus cannot be passed
-	## down from toplevel Makefile to bpftool's Makefile.
+## $OUTPUT is overwritten in kbuild Makefile, and thus cannot be passed
+## down from toplevel Makefile to bpftool's Makefile.
 
-	# make_with_tmpdir tools/bpf OUTPUT
-	echo -e "skip:    make tools/bpf OUTPUT=<dir> (not supported)\n"
+# make_with_tmpdir tools/bpf OUTPUT
+echo -e "skip:    make tools/bpf OUTPUT=<dir> (not supported)\n"
 
-	make_with_tmpdir tools/bpf O
-else
-	echo -e "skip:    make tools/bpf (no .config found)\n"
-	echo -e "skip:    make tools/bpf OUTPUT=<dir> (not supported)\n"
-	echo -e "skip:    make tools/bpf O=<dir> (no .config found)\n"
-fi
+make_with_tmpdir tools/bpf O
 
 echo -e "... from kernel source tree\n"
 
