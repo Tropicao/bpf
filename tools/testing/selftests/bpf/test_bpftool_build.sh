@@ -48,7 +48,7 @@ check() {
 
 make_and_clean() {
 	echo -e "\$PWD:    $PWD"
-	echo -e "command: make -s $* >/dev/null"
+	echo -e "command: make $J -s $* >/dev/null"
 	make $J -s $* >/dev/null
 	if [ $? -ne 0 ] ; then
 		ERROR=1
@@ -75,7 +75,7 @@ make_with_tmpdir() {
 		ARGS=${@:1:(($# - 1))}
 	fi
 	echo -e "\$PWD:    $PWD"
-	echo -e "command: make -s $ARGS ${@: -1}=$TMPDIR/ >/dev/null"
+	echo -e "command: make $J -s $ARGS ${@: -1}=$TMPDIR/ >/dev/null"
 	make $J -s $ARGS ${@: -1}=$TMPDIR/ >/dev/null
 	if [ $? -ne 0 ] ; then
 		ERROR=1
