@@ -132,3 +132,4 @@ so formatting checks need the same version when reproducing CI failures.
   authorship or review; do not fabricate them or add unsolicited AI attribution.
 - Change descriptions should state what changed, the supporting validation and any
   limitations. Distinguish observations from hypotheses.
+- DUMMY CHANGE
