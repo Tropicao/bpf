@@ -10,6 +10,6 @@ on:
 
 jobs:
   bpftool:
-    uses: ./.github/workflows/build-bpftool.yml
+    uses: ./.github/workflows/test-bpftool.yml
     with:
       download_sources: ${{ inputs.download_sources }}
